@@ -1,0 +1,9 @@
+{
+  "name": "core-functions",
+  "version": "1.0.0",
+  "main": "dist/main.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --mode production --config ./webpack.config.js"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "scaffolding",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server --open --hot --mode development --config ./webpack.config.js",
+    "build": "webpack --mode production --config ./webpack.config.js"
+  },
+  "dependencies": {
+    "core-functions": "1.0.0",
+    "prop-types": "^15.7.2",
+    "react-router-dom": "^5.2.0"
+  }
+}
