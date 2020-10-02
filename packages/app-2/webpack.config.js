@@ -13,6 +13,10 @@ module.exports = {
       "react-dom": path.resolve("../../node_modules/react-dom"),
     },
   },
+  externals: {
+    react: "React",
+    "react-dom": "ReactDom",
+  },
   module: {
     rules: [
       {

@@ -8,7 +8,7 @@ const PageTwo = lazy(() => import("./page-2"));
 const url = new URL(document.currentScript.src);
 __webpack_public_path__ = `${url.origin}/${__webpack_public_path__}`;
 
-const Scaffolding = () => {
+const AppOne = () => {
   return (
     <div
       style={{
@@ -44,4 +44,4 @@ const Scaffolding = () => {
   );
 };
 
-initializeApp(Scaffolding, { id: "app-one-root", name: "appOne" });
+initializeApp(AppOne, { id: "app-one-root", name: "appOne" });

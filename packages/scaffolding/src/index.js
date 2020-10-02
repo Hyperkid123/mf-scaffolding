@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { render } from "react-dom";
+import ReactDom from "react-dom";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { initializeScaffolding } from "core-functions";
 import ScaffoldingContext from "./scaffolding-context";
@@ -12,6 +12,9 @@ import {
   Typography,
 } from "@material-ui/core";
 import { grey, red } from "@material-ui/core/colors";
+
+window.React = React;
+window.ReactDom = ReactDom;
 
 const feedMock = () =>
   Promise.resolve({
@@ -74,4 +77,4 @@ const Scaffolding = () => {
 };
 
 const wrapper = document.getElementById("root");
-render(<Scaffolding />, wrapper);
+ReactDom.render(<Scaffolding />, wrapper);

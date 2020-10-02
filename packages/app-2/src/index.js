@@ -1,5 +1,5 @@
 import { initializeApp } from "core-functions";
-import React, { Fragment, lazy, Suspense } from "react";
+import React, { Fragment, lazy, Suspense, useState } from "react";
 import { Switch, BrowserRouter, Route, Link } from "react-router-dom";
 
 const PageOne = lazy(() => import("./page-1"));
@@ -8,7 +8,9 @@ const PageTwo = lazy(() => import("./page-2"));
 const url = new URL(document.currentScript.src);
 __webpack_public_path__ = `${url.origin}/${__webpack_public_path__}`;
 
-const Scaffolding = () => {
+const AppTwo = () => {
+  const [foo] = useState("foo");
+  console.log("foo", foo);
   return (
     <div
       style={{
@@ -44,4 +46,4 @@ const Scaffolding = () => {
   );
 };
 
-initializeApp(Scaffolding, { id: "app-two-root", name: "appTwo" });
+initializeApp(AppTwo, { id: "app-two-root", name: "appTwo" });
