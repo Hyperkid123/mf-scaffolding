@@ -92,7 +92,9 @@ const Layout = ({ children }) => {
         }}
         anchor="left"
       >
-        <div className={clsx(classes.toolbar, classes.brand)}></div>
+        <Link to="/">
+          <div className={clsx(classes.toolbar, classes.brand)}></div>
+        </Link>
         <Divider />
         <List>
           {[
