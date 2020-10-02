@@ -21,6 +21,7 @@ export const getAppsByPathname = (pathname) => {
 export const getApp = (name) => window.scaffolding.apps[name];
 
 export const initializeApp = (App, configuration) => {
+  console.log({ App, configuration });
   window.scaffolding.apps[configuration.name] = {
     Component: App,
     nodeId: configuration.id,

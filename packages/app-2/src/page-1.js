@@ -2,7 +2,7 @@ import React from 'react'
 
 const PageOne = () => {
   return (
-    <h1>Page one app two</h1>
+    <h1>Page one app TWO</h1>
   )
 }
 

@@ -1,21 +1,17 @@
-import React, { useEffect, useState, createContext, useContext } from "react";
-import PropTypes from "prop-types";
-import { render, unmountComponentAtNode } from "react-dom";
+import React, { useEffect, useState } from "react";
+import { render } from "react-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { initializeScaffolding } from "core-functions";
+import ScaffoldingContext from "./scaffolding-context";
+import GenericRoute from "./generic-route";
+import Layout from "./layout";
 import {
-  BrowserRouter,
-  Link,
-  Route,
-  Switch,
-  useLocation,
-  useRouteMatch,
-} from "react-router-dom";
-import {
-  getAppsByPathname,
-  getApp,
-  initializeScaffolding,
-} from "core-functions";
-
-const ScaffoldingContext = createContext({ initialized: false });
+  createMuiTheme,
+  makeStyles,
+  ThemeProvider,
+  Typography,
+} from "@material-ui/core";
+import { grey, red } from "@material-ui/core/colors";
 
 const feedMock = () =>
   Promise.resolve({
@@ -29,62 +25,19 @@ const feedMock = () =>
     },
   });
 
-const GenericRoute = ({ path }) => {
-  const [{ id, Component, appPathname }, setComponent] = useState({});
-  const { initialized } = useContext(ScaffoldingContext);
-  const { path: pathname } = useRouteMatch(path);
-  useEffect(() => {
-    if (initialized) {
-      const { dest, name } = getAppsByPathname(pathname)[0];
-      if (!getApp(name)) {
-        let s;
-        const InjectScriptPromise = new Promise((res, rej) => {
-          s = document.createElement("script");
-          s.src = dest;
-          s.onload = (...args) => {
-            res(name);
-          };
-          s.onerror = (...args) => {
-            console.log(args);
-            rej(args);
-          };
-        });
-        document.body.appendChild(s);
-        InjectScriptPromise.then((name) => {
-          const app = getApp(name);
-          if (appPathname && pathname !== appPathname) {
-            unmountComponentAtNode(document.getElementById(id));
-          }
-          setComponent({
-            id: app.nodeId,
-            Component: app.Component,
-            appPathname: pathname,
-          });
-        });
-      } else {
-        const app = getApp(name);
-        if (appPathname && pathname !== appPathname) {
-          unmountComponentAtNode(document.getElementById(id));
-        }
-        setComponent({
-          id: app.nodeId,
-          Component: app.Component,
-          appPathname: pathname,
-        });
-      }
-    }
-  }, [pathname, initialized]);
-  useEffect(() => {
-    if (Component) {
-      render(<Component />, document.getElementById(id));
-    }
-  }, [Component]);
-  return <div id={id}></div>;
-};
+const theme = createMuiTheme({
+  palette: {
+    primary: grey,
+    secondary: red,
+  },
+});
 
-GenericRoute.propTypes = {
-  path: PropTypes.string.isRequired,
-};
+const useStyles = makeStyles(() => ({
+  emptyText: {
+    textAlign: "center",
+    height: "calc(100vh - 64px * 1.8)",
+  },
+}));
 
 const Scaffolding = () => {
   const [initialized, setInitialized] = useState(false);
@@ -94,27 +47,28 @@ const Scaffolding = () => {
       setInitialized(true);
     });
   }, []);
+  const classes = useStyles();
   return (
     <BrowserRouter>
-      <h1>Scaffolding</h1>
-      <ul>
-        <li>
-          <Link to="/app-one">App one</Link>
-        </li>
-        <li>
-          <Link to="/app-two">App two</Link>
-        </li>
-      </ul>
-      <ScaffoldingContext.Provider value={{ initialized }}>
-        <Switch>
-          <Route path="/app-one">
-            <GenericRoute path="/app-one" />
-          </Route>
-          <Route path="/app-two">
-            <GenericRoute path="/app-two" />
-          </Route>
-        </Switch>
-      </ScaffoldingContext.Provider>
+      <ThemeProvider theme={theme}>
+        <Layout>
+          <ScaffoldingContext.Provider value={{ initialized }}>
+            <Switch>
+              <Route path="/app-one">
+                <GenericRoute path="/app-one" />
+              </Route>
+              <Route path="/app-two">
+                <GenericRoute path="/app-two" />
+              </Route>
+              <Route>
+                <div className={classes.emptyText}>
+                  <Typography variant="h2">Chrome 2.0 scaffolding</Typography>
+                </div>
+              </Route>
+            </Switch>
+          </ScaffoldingContext.Provider>
+        </Layout>
+      </ThemeProvider>
     </BrowserRouter>
   );
 };

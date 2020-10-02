@@ -6,6 +6,13 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --config ./webpack.config.js --port 8082",
     "build": "webpack --mode production --config ./webpack.config.js"
-  
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "replace-in-file-webpack-plugin": "^1.0.6"
   }
 }
