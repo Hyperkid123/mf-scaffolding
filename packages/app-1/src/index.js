@@ -10,7 +10,15 @@ __webpack_public_path__ = `${url.origin}/${__webpack_public_path__}`;
 
 const Scaffolding = () => {
   return (
-    <div style={{ backgroundColor: "papayawhip", color: "darkgoldenrod" }}>
+    <div
+      style={{
+        backgroundColor: "papayawhip",
+        color: "darkgoldenrod",
+        padding: 8,
+        margin: 0,
+        minHeight: "100%",
+      }}
+    >
       <BrowserRouter basename="/app-one">
         <h1>App one</h1>
         <ul>

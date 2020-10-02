@@ -63,7 +63,7 @@ const GenericRoute = ({ path }) => {
       render(<Component />, document.getElementById(id));
     }
   }, [Component]);
-  return <div id={id}></div>;
+  return <div id={id} style={{ height: "100%" }}></div>;
 };
 
 GenericRoute.propTypes = {

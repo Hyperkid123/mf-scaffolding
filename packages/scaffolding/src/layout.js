@@ -63,8 +63,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   appletContainer: {
-    
-  }
+    height: "calc(100vh - 64px)",
+  },
 }));
 
 const Layout = ({ children }) => {
