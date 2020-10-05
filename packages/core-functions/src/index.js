@@ -21,9 +21,25 @@ export const getAppsByPathname = (pathname) => {
 export const getApp = (name) => window.scaffolding.apps[name];
 
 export const initializeApp = (App, configuration) => {
-  console.log({ App, configuration });
+  console.log("initialize app: ", { App, configuration });
   window.scaffolding.apps[configuration.name] = {
     Component: App,
     nodeId: configuration.id,
   };
+};
+
+/**
+ * mock demo for insights
+ */
+window.insights = {
+  chrome: {
+    init: () => {},
+    getApp: () => "rbac",
+    identifyApp: () => {},
+    on: ("foo", () => {}),
+    auth: {
+      getUser: () =>
+        Promise.resolve({ entitlements: [], identity: { user: { is_org_admin: true } } }),
+    },
+  },
 };

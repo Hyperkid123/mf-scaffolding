@@ -100,6 +100,7 @@ const Layout = ({ children }) => {
           {[
             { label: "App one", to: "/app-one" },
             { label: "App two", to: "/app-two" },
+            { label: "rbac", to: "/rbac" },
           ].map(({ label, to }, index) => (
             <ListItem
               button

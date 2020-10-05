@@ -26,6 +26,10 @@ const feedMock = () =>
       dest: "http://localhost:8082/main.js",
       location: "/app-two",
     },
+    rbac: {
+      dest: "http://localhost:8083/main.js",
+      location: "/rbac",
+    },
   });
 
 const theme = createMuiTheme({
@@ -62,6 +66,9 @@ const Scaffolding = () => {
               </Route>
               <Route path="/app-two">
                 <GenericRoute path="/app-two" />
+              </Route>
+              <Route path="/rbac">
+                <GenericRoute path="/rbac" />
               </Route>
               <Route>
                 <div className={classes.emptyText}>
