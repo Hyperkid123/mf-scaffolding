@@ -7,7 +7,7 @@ module.exports = {
     contentBase: path.join(__dirname, "./dist"),
   },
   output: {
-    filename: "[name].bundle.js",
+    filename: "apps/rbac/[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
     publicPath: "/",
   },
